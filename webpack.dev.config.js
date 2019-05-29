@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+const {VueLoaderPlugin} = require('vue-loader')
+
 module.exports = {
   entry: {
     main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js']
@@ -44,11 +46,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader']
+      },
+      {
+        test: /\.vue$/,
+        use: ['vue-loader']
       }
     ]
   },
@@ -56,9 +62,10 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/html/index.html",
       filename: "./index.html",
-      excludeChunks: [ 'server' ]
+      excludeChunks: ['server']
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new VueLoaderPlugin()
   ]
 }
