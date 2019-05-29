@@ -1,12 +1,19 @@
 <template>
     <div>
-        <p>hello, this is vue app, you can see me if you an laod me correctly!</p>
+        <ul>
+            <router-link to="/blog-list">list blog</router-link>
+            <router-link to="/blog-view">view blog</router-link>
+        </ul>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
+  import router from './router/index'
+
   export default {
     name: "App",
+    router
   }
 </script>
 
